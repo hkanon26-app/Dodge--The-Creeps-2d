@@ -4,10 +4,15 @@ extends Node
 var score: int = 0
 
 
+# Estados del juego
+enum {COUNTDOWN, PLAYING, GAME_OVER}
+var state = COUNTDOWN
+
 func _on_player_hit() -> void:
-	pass # Replace with function body.
+	game_over()
 
 func game_over():
+	state = GAME_OVER
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
@@ -15,26 +20,41 @@ func game_over():
 	$DeathSound.play()
 	
 func new_game():
+	# Limpiar enemigos anteriores
+	get_tree().call_group("mobs", "queue_free")
+	
+	# Reiniciar estado y puntuación
+	state = COUNTDOWN
 	score = 0 
-	$Player.start($StartPosition.position)
-	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Prepararse")
-	get_tree().call_group("mobs", "queue_free")
+	$GameOver.hide()
+	
+	# Iniciar jugador y temporizadores
+	$Player.start($StartPosition.position)
+	$StartTimer.start()
+	
 	$Music.play()
 	
 	
-	
 func _on_score_timer_timeout() -> void:
-	score += 1
-	$HUD.update_score(score)
+	# Solo sumar puntos durante el juego activo
+	if state == PLAYING:
+		score += 1
+		$HUD.update_score(score)
 
 func _on_start_timer_timeout() -> void:
+	# Cambiar a estado PLAYING cuando termina la cuenta regresiva
+	state = PLAYING
 	$MobTimer.start()
 	$ScoreTimer.start()
 
 func _on_mob_timer_timeout() -> void:
-	# Crea una nueva instancia de la escena de la mafia.
+	# Solo generar enemigos durante el juego activo
+	if state != PLAYING:
+		return
+		
+	# Crea una nueva instancia de la escena de la mafia.	
 	var mob = mob_scene.instantiate()
 	
 	# Elija una ubicación aleatoria en Path2D.

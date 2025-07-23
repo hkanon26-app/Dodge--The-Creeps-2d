@@ -53,3 +53,9 @@ func start(pos):
 	show()
 	$CollisionShape2D.disabled = false
 	
+	# Configura animación inicial
+	$AnimatedSprite2D.animation = "walk"
+	$AnimatedSprite2D.flip_h = false
+	$AnimatedSprite2D.flip_v = false
+	$AnimatedSprite2D.play()
+	
