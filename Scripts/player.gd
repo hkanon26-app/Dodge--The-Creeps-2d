@@ -5,13 +5,14 @@ signal hit
 	
 @export var speed = 400
 var screen_size
+var joystick : Joystick
 	
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	hide()
-	
+	z_index = 1
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -60,3 +61,5 @@ func start(pos):
 	$AnimatedSprite2D.flip_v = false
 	$AnimatedSprite2D.play()
 	
+func recibir_joystick(j : Joystick):
+	joystick

@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyaud72b1iyb5"]
+
+[ext_resource type="Script" uid="uid://b0ovgiud633vs" path="res://Scripts/joystick.gd" id="1_1lrsh"]
+[ext_resource type="Texture2D" uid="uid://biugadg747amt" path="res://Assets/art/circulo.png" id="2_hs5h3"]
+[ext_resource type="Texture2D" uid="uid://co8x8jfu23hss" path="res://Assets/art/CirculoGris.png" id="3_gru1d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8wvih"]
+radius = 64.0
+
+[node name="Joystick" type="Area2D"]
+script = ExtResource("1_1lrsh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8wvih")
+
+[node name="Rango" type="Sprite2D" parent="."]
+texture = ExtResource("2_hs5h3")
+
+[node name="Palanca" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_gru1d")
