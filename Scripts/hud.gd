@@ -4,14 +4,14 @@ extends CanvasLayer
 signal start_game
 
 
-func show_massage(text):
+func show_message(text):
 	$Message.text = text
 	$Message.show()
 	$MessageTimer.start()
 	
 	
 func show_game_over():
-	show_massage("Game Over")
+	show_message("Game Over")
 	# Esperar hasta que el Messagetimer haya contado.
 	await $MessageTimer.timeout
 	
@@ -22,7 +22,7 @@ func show_game_over():
 	$StartButton.show()
 	
 	
-func update_score():
+func update_score(score):
 	$ScoreLabel.text = str(score)
 	
 	

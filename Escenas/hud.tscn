@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://doyl5anstr3fl"]
 
-[ext_resource type="Script" uid="uid://cct8wdaemi03n" path="res://Scripts/hud.gd" id="1_v1vk6"]
-[ext_resource type="FontFile" uid="uid://1hqt6b5cum4w" path="res://Assets/fonts/Xolonium-Regular.ttf" id="2_5x6hg"]
+[ext_resource type="Script" uid="uid://cct8wdaemi03n" path="res://Scripts/hud.gd" id="1_khix5"]
+[ext_resource type="FontFile" uid="uid://1hqt6b5cum4w" path="res://Assets/fonts/Xolonium-Regular.ttf" id="2_s56i8"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_v1vk6"]
 action = &"start_game"
@@ -10,7 +10,7 @@ action = &"start_game"
 events = [SubResource("InputEventAction_v1vk6")]
 
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource("1_v1vk6")
+script = ExtResource("1_khix5")
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchors_preset = 5
@@ -20,7 +20,7 @@ offset_left = -45.5
 offset_right = 45.5
 offset_bottom = 78.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_5x6hg")
+theme_override_fonts/font = ExtResource("2_s56i8")
 theme_override_font_sizes/font_size = 64
 text = "0"
 horizontal_alignment = 1
@@ -38,7 +38,7 @@ offset_right = 240.0
 offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_5x6hg")
+theme_override_fonts/font = ExtResource("2_s56i8")
 theme_override_font_sizes/font_size = 64
 text = "¡Dodga los Creeps!"
 horizontal_alignment = 1
@@ -57,7 +57,7 @@ offset_right = 111.5
 offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("2_5x6hg")
+theme_override_fonts/font = ExtResource("2_s56i8")
 theme_override_font_sizes/font_size = 64
 shortcut = SubResource("Shortcut_5x6hg")
 text = "Start"
