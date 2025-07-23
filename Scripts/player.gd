@@ -6,6 +6,7 @@ signal hit
 @export var speed = 400
 var screen_size
 var joystick : Joystick
+var direccion = Vector2()
 	
 	
 # Called when the node enters the scene tree for the first time.
@@ -13,8 +14,16 @@ func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	hide()
 	z_index = 1
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+
+func _input(_event):
+	if joystick != null and is_instance_valid(joystick):
+		direccion = joystick.direccion
+	else:
+		direccion.x = Input.get_axis("ui_left", "ui_right")
+		direccion.y = Input.get_axis("ui_up", "ui_down")
+		direccion = direccion.normalized()
+		
 func _process(delta: float) -> void:
 	var velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
@@ -62,4 +71,4 @@ func start(pos):
 	$AnimatedSprite2D.play()
 	
 func recibir_joystick(j : Joystick):
-	joystick
+	joystick  = j
