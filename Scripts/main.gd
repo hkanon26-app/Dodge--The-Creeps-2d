@@ -28,8 +28,7 @@ func new_game():
 	score = 0 
 	$HUD.update_score(score)
 	$HUD.show_message("Prepararse")
-	$GameOver.hide()
-	
+		
 	# Iniciar jugador y temporizadores
 	$Player.start($StartPosition.position)
 	$StartTimer.start()

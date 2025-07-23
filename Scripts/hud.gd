@@ -10,7 +10,7 @@ func show_message(text):
 	$MessageTimer.start()
 	
 	
-func show_game_over():
+func show_game_over():	
 	show_message("Game Over")
 	# Esperar hasta que el Messagetimer haya contado.
 	await $MessageTimer.timeout
@@ -29,7 +29,11 @@ func update_score(score):
 func _on_start_button_pressed() -> void:
 	$StartButton.hide()
 	start_game.emit()
-
-
+	
+	
 func _on_message_timer_timeout() -> void:
 	$Message.hide()
+	
+	
+func hide_game_over():
+	$GameOcer.hide()

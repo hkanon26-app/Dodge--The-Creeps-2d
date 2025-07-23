@@ -36,15 +36,19 @@ radius = 32.0
 height = 80.0
 
 [node name="Player" type="Area2D"]
+z_index = 1
 script = ExtResource("1_om0ln")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.414004, 0.618619, 0.402547, 1)
+texture_filter = 1
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_b21vg")
 animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_xlwfv")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
