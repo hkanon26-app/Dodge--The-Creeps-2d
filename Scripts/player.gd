@@ -16,33 +16,42 @@ func _ready() -> void:
 	z_index = 1
 
 
-func _input(_event):
-	if joystick != null and is_instance_valid(joystick):
-		direccion = joystick.direccion
-	else:
-		direccion.x = Input.get_axis("ui_left", "ui_right")
-		direccion.y = Input.get_axis("ui_up", "ui_down")
-		direccion = direccion.normalized()
-		
 func _process(delta: float) -> void:
 	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1 
 	
+	
+	
+	# Sistema para móvil: usa el joystick
+	if OS.get_name() in ["Android", "iOS"]:
+		if joystick != null and is_instance_valid(joystick):
+			# Usamos la dirección del joystick directamente
+			velocity = joystick.direccion * speed
+			
+	# Sistema para escritorio: usa teclado
+	else:
+		if Input.is_action_pressed("move_right"):
+			velocity.x += 1
+		if Input.is_action_pressed("move_left"):
+			velocity.x -= 1
+		if Input.is_action_pressed("move_down"):
+			velocity.y += 1
+		if Input.is_action_pressed("move_up"):
+			velocity.y -= 1 
+			
+		# Normalizar para movimiento diagonal
+		if velocity.length() > 0:
+			velocity = velocity.normalized() * speed
+		
+	# Aplicar movimiento
+	position += velocity * delta
+	position = position.clamp(Vector2.ZERO, screen_size)
+	
+		
+	# Manejar animaciones
 	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
 		$AnimatedSprite2D.play()
 	else:
 		$AnimatedSprite2D.stop()
-	
-	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
 	
 	if velocity.x != 0:
 		$AnimatedSprite2D.animation = "walk"

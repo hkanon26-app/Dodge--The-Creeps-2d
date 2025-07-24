@@ -28,7 +28,8 @@ func _input(event: InputEvent) -> void:
 			if distancia <= radio:
 				index = event.index
 				palanca.global_position = event.position
-				distancia = global_position.direction_to(palanca.global_position) * distancia / radio
+				distancia = (event.position - global_position).normalized() * (distancia / radio)
+				#distancia = global_position.direction_to(palanca.global_position) * distancia / radio
 		elif event.index == index:
 			# si se acaba de soltar
 			index = -1
@@ -42,9 +43,11 @@ func _input(event: InputEvent) -> void:
 			distancia = global_position.distance_to(event.position)
 			if distancia <= radio:
 				palanca.global_position = event.position
-				distancia = (global_position.direction_to(palanca.global_position) * distancia) / radio
+				direccion = (event.position - global_position).normalized() * (distancia / radio)
+				#distancia = (global_position.direction_to(palanca.global_position) * distancia) / radio
 			else:
-				direccion = global_position.direction_to(event.position)
+				direccion = (event.position - global_position).normalized()
+				#direccion = global_position.direction_to(event.position)
 				palanca.global_position = global_position + (direccion * radio)
 			
 		
