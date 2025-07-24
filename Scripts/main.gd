@@ -8,6 +8,13 @@ enum {COUNTDOWN, PLAYING, GAME_OVER}
 var state = COUNTDOWN
 
 
+func _ready():
+	if OS.get_name() in ["Android", "iOS"]:
+		# Valores numéricos para orientación:
+		# 0: Landscape, 1: Portrait, 2: Reverse Landscape, 3: Reverse Portrait
+		DisplayServer.screen_set_orientation(1)  # 1 = Portrait
+
+
 func _on_player_hit() -> void:
 	game_over()
 
