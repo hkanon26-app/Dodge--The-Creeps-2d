@@ -3,13 +3,14 @@ extends Node
 @export var mob_scene: PackedScene
 var score: int = 0
 
-
 # Estados del juego
 enum {COUNTDOWN, PLAYING, GAME_OVER}
 var state = COUNTDOWN
 
+
 func _on_player_hit() -> void:
 	game_over()
+
 
 func game_over():
 	state = GAME_OVER
@@ -18,6 +19,7 @@ func game_over():
 	$HUD.show_game_over()
 	$Music.stop()
 	$DeathSound.play()
+	
 	
 func new_game():
 	# Limpiar enemigos anteriores
@@ -42,11 +44,13 @@ func _on_score_timer_timeout() -> void:
 		score += 1
 		$HUD.update_score(score)
 
+
 func _on_start_timer_timeout() -> void:
 	# Cambiar a estado PLAYING cuando termina la cuenta regresiva
 	state = PLAYING
 	$MobTimer.start()
 	$ScoreTimer.start()
+
 
 func _on_mob_timer_timeout() -> void:
 	# Solo generar enemigos durante el juego activo
